@@ -1,18 +1,33 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {Provider} from 'react-redux';
 import ListProcess from './components/ListProcess';
 import store from './redux/store';
 function App(): JSX.Element {
   return (
-    <Provider store={store}>
-      <SafeAreaView style={styles.screen}>
-        <View style={styles.contain}>
-          <Text style={styles.title}>Expense Tracker</Text>
-        </View>
-        <ListProcess />
-      </SafeAreaView>
-    </Provider>
+    <>
+      {Platform.OS === 'ios' && (
+        <StatusBar
+          backgroundColor={'light-content'}
+          barStyle={'light-content'}
+        />
+      )}
+      <Provider store={store}>
+        <SafeAreaView style={styles.screen}>
+          <View style={styles.contain}>
+            <Text style={styles.title}>Expense Tracker</Text>
+          </View>
+          <ListProcess />
+        </SafeAreaView>
+      </Provider>
+    </>
   );
 }
 
